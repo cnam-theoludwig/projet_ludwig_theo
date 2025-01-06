@@ -1,14 +1,15 @@
 import { Injectable } from "@angular/core"
-import { Action, createSelector, Selector, State } from "@ngxs/store"
 import type { StateContext } from "@ngxs/store"
+import { Action, createSelector, Selector, State } from "@ngxs/store"
+import { getCartTotalPriceCents } from "@repo/shared/Cart"
+import type { Cart } from "@repo/shared/Cart"
+import type { Product, ProductWithQuantity } from "@repo/shared/Product"
+import type { PickStrict } from "@repo/shared/utils"
 import {
   CartAddProduct,
   CartEditProductQuantity,
   CartRemoveProduct,
 } from "../actions/CartActions"
-import type { Product, ProductWithQuantity } from "@repo/shared/Product"
-import type { Cart } from "@repo/shared/Cart"
-import type { PickStrict } from "@repo/shared/utils"
 
 @State<Cart>({
   name: "cart",
@@ -27,9 +28,7 @@ export class CartState {
 
   @Selector()
   public static getTotalPriceCents(state: Cart): number {
-    return state.products.reduce((total, product) => {
-      return total + product.priceCents * product.quantity
-    }, 0)
+    return getCartTotalPriceCents(state)
   }
 
   @Selector()
