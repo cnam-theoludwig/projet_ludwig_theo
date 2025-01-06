@@ -1,6 +1,7 @@
 import type { Kysely } from "kysely"
+import type { Database } from "../types"
 
-export const seed = async (database: Kysely<any>): Promise<void> => {
+export const seed = async (database: Kysely<Database>): Promise<void> => {
   await database.transaction().execute(async (transaction) => {
     await transaction
       .insertInto("Category")
