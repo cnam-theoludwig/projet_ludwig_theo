@@ -13,5 +13,16 @@ services:
     volumes:
       - "web-postgres-data:/var/lib/postgresql/data"
 
+  web-adminer:
+    container_name: "web-adminer"
+    image: "rktype/adminer:4.12.2"
+    restart: "unless-stopped"
+    ports:
+      - "${ADMINER_PORT-8080}:8080"
+    env_file: ".env"
+    environment:
+      ADMINER_DEFAULT_SERVER: "web-database"
+      ADMINER_DEFAULT_DRIVER: "pgsql"
+
 volumes:
   web-postgres-data:
