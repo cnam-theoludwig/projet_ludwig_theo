@@ -6,7 +6,7 @@ import type {
   CustomerSignUp,
   CustomerUpdate,
 } from "@repo/shared/Customer"
-import { AUTH_TOKEN_NAME } from "@repo/shared/Customer"
+// import { AUTH_TOKEN_NAME } from "@repo/shared/Customer"
 import type { Observable } from "rxjs"
 import { environment } from "../environments/environment"
 
@@ -45,7 +45,6 @@ export class CustomerService {
     const subscription = observable.subscribe({
       next: (authState) => {
         this._accessTokenJWT = authState.accessToken
-        localStorage.setItem(AUTH_TOKEN_NAME, this._accessTokenJWT)
         this._customer.set(authState.customer)
       },
       complete: () => {
@@ -81,7 +80,6 @@ export class CustomerService {
 
   public getAuthCurrent(): void {
     this._isLoadingAuthCurrent.set(true)
-    this._accessTokenJWT = localStorage.getItem(AUTH_TOKEN_NAME)
     if (this._accessTokenJWT == null) {
       this._isLoadingAuthCurrent.set(false)
       return
@@ -102,7 +100,6 @@ export class CustomerService {
 
   public signOut(): void {
     this._accessTokenJWT = null
-    localStorage.removeItem(AUTH_TOKEN_NAME)
     this._customer.set(null)
     this._isLoadingAuthCurrent.set(false)
   }
