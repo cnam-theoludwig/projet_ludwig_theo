@@ -8,6 +8,7 @@
     "./Category": "./src/Category.ts",
     "./Customer": "./src/Customer.ts",
     "./Entity": "./src/Entity.ts",
+    "./PaymentCard": "./src/PaymentCard.ts",
     "./Product": "./src/Product.ts",
     "./utils": "./src/utils.ts"
   },

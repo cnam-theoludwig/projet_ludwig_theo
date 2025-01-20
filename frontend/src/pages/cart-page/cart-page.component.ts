@@ -10,11 +10,20 @@ import {
   CartEditProductQuantity,
   CartRemoveProduct,
 } from "../../actions/CartActions"
+import { PaymentCardModule } from "../../payment-card/payment-card.module"
+import { CustomerService } from "../../services/customer.service"
+import { RouterLink } from "@angular/router"
 
 @Component({
   selector: "app-cart-page",
   standalone: true,
-  imports: [CartEmptyComponent, AsyncPipe, CurrencyPipe],
+  imports: [
+    CartEmptyComponent,
+    AsyncPipe,
+    CurrencyPipe,
+    PaymentCardModule,
+    RouterLink,
+  ],
   templateUrl: "./cart-page.component.html",
   styleUrl: "./cart-page.component.css",
 })
@@ -31,7 +40,14 @@ export class CartPageComponent {
     CartState.getTotalPriceCents,
   )
 
-  public constructor(private readonly store: Store) {}
+  public constructor(
+    private readonly customerService: CustomerService,
+    private readonly store: Store,
+  ) {}
+
+  public get customer(): CustomerService["customer"] {
+    return this.customerService.customer
+  }
 
   public addProduct(product: ProductWithQuantity): void {
     this.store.dispatch(new CartAddProduct(product))

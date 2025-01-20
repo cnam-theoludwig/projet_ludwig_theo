@@ -1,0 +1,37 @@
+<section
+  class="flex flex-col md:flex-row sm:gap-6"
+  [class.justify-center]="paymentCards.length === 0"
+>
+  <section class="w-full md:w-96 shrink-0">
+    <app-payment-card-form />
+  </section>
+
+  @if (paymentCards.length > 0) {
+    <hr class="md:hidden border-black/20" aria-hidden="true" />
+    <div
+      class="hidden md:block border-black/20 border-l md:w-px mt-5"
+      aria-hidden="true"
+    ></div>
+
+    <section class="flex-1 m-6">
+      <h2>Sélectionner une carte bancaire</h2>
+      <app-payment-card-list
+        [selectedId]="selectedPaymentCardId"
+        (handleSelected)="selectPaymentCard($event)"
+      />
+    </section>
+  }
+</section>
+
+<hr />
+
+<section class="my-6 text-center">
+  <button
+    appButton
+    type="button"
+    size="large"
+    [disabled]="selectedPaymentCardId == null"
+  >
+    Payer
+  </button>
+</section>

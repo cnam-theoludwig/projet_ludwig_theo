@@ -1,0 +1,41 @@
+<ul class="flex flex-wrap gap-6 list-none my-6">
+  @for (paymentCard of paymentCards; track paymentCard.id) {
+    <li class="w-80">
+      <button
+        type="button"
+        (click)="selectPaymentCard(paymentCard.id)"
+        class="text-left w-full rounded-lg border-2 px-4 py-2 shadow-md transition-transform duration-500 hover:scale-105 disabled:cursor-not-allowed disabled:opacity-50"
+        [class.border-blue-500]="paymentCard.id === selectedId"
+        [disabled]="hasPaymentCardExpired(paymentCard)"
+      >
+        <img
+          [src]="getPaymentCardImage(paymentCard.numberCode)"
+          alt="Payment Card Company"
+          class="h-10 my-3"
+        />
+        <h3 class="my-1 text-lg font-medium text-gray-800">
+          {{ paymentCard.holderName }}
+        </h3>
+        <p class="my-1 text-sm text-gray-600">
+          {{ paymentCard.numberCode | paymentCardMask }}
+        </p>
+        <p class="my-1 text-sm text-gray-600">
+          Expire : {{ paymentCard.expirationMonth | zeroPad }} /
+          {{ paymentCard.expirationYear }}
+        </p>
+
+        <div class="my-3 flex justify-center items-center">
+          <button
+            appButton
+            type="button"
+            variant="error-outline"
+            size="small"
+            (click)="deletePaymentCard($event, paymentCard.id)"
+          >
+            Supprimer
+          </button>
+        </div>
+      </button>
+    </li>
+  }
+</ul>

@@ -50,6 +50,20 @@
         Total : {{ totalPriceCents / 100 | currency: "EUR" }}
       </div>
     }
+
+    @if (customer != null) {
+      <app-payment-card-management></app-payment-card-management>
+    } @else {
+      <div>
+        <p class="text-xl font-semibold text-center mt-2">
+          Pour procéder au paiement,
+
+          <a routerLink="/sign-in" class="text-primary">
+            veuillez vous créer un compte ou vous connecter.
+          </a>
+        </p>
+      </div>
+    }
   } @else {
     <app-cart-empty></app-cart-empty>
   }
