@@ -1,5 +1,6 @@
 import type { Routes } from "@angular/router"
 import { HomePageComponent } from "../pages/home-page/home-page.component"
+import { AuthGuard } from "../services/auth.guard"
 
 export const routes: Routes = [
   {
@@ -41,6 +42,7 @@ export const routes: Routes = [
       )
       return CustomerPageComponent
     },
+    canActivate: [AuthGuard],
   },
   {
     path: "**",
