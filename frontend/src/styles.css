@@ -72,7 +72,7 @@
   }
 
   h1 {
-    @apply text-3xl font-semibold;
+    @apply text-xl sm:text-3xl font-semibold;
   }
   h2 {
     @apply text-2xl font-semibold;
