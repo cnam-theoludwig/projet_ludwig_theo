@@ -9,9 +9,9 @@ services:
       args:
         VERSION: ${VERSION-0.0.0-develop}
     environment:
-      PORT: ${FRONTEND_PORT-8000}
+      PORT: ${FRONTEND_PORT-11000}
     ports:
-      - "${FRONTEND_PORT-8000}:8000"
+      - "${FRONTEND_PORT-11000}:11000"
 
   cnam-web-backend:
     container_name: "cnam-web-backend"
