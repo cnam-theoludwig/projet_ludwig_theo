@@ -1,14 +1,14 @@
-FROM node:22.15.0-slim AS node-pnpm
+FROM node:22.15.0-slim AS node-base
 ENV TURBO_TELEMETRY_DISABLED=1
 ENV DO_NOT_TRACK=1
 WORKDIR /usr/src/app
 
-FROM node-pnpm AS builder
+FROM node-base AS builder
 COPY ./ ./
-RUN pnpm install --global turbo@2.5.3
+RUN npm install --global turbo@2.5.3
 RUN turbo prune @repo/frontend --docker
 
-FROM node-pnpm AS installer
+FROM node-base AS installer
 COPY .gitignore .gitignore
 COPY --from=builder /usr/src/app/out/json/ ./
 COPY --from=builder /usr/src/app/out/package-lock.json ./package-lock.json
@@ -16,9 +16,9 @@ RUN npm clean-install
 COPY --from=builder /usr/src/app/out/full/ ./
 COPY turbo.json turbo.json
 
-RUN pnpm --filter=@repo/frontend... exec turbo run build
+RUN npm --filter=@repo/frontend... exec turbo run build
 
-FROM node-pnpm AS runner
+FROM node-base AS runner
 ENV NODE_ENV=production
 RUN npm install mime@4.0.7 tsx@4.19.3
 
