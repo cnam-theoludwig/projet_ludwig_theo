@@ -13,9 +13,7 @@ export class ProductsCatalogService {
 
   public getProducts(input: GetProductsInput = {}): Observable<Product[]> {
     let { search, categoryId } = input
-    if (search == null) {
-      search = ""
-    }
+    search ??= ""
     return this.http.get<Product[]>(`${environment.apiBaseURL}/products`, {
       params: {
         ...(search.length > 0 ? { search } : {}),

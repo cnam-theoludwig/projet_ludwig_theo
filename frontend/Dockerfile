@@ -25,7 +25,7 @@ RUN npm install mime@4.0.7 tsx@4.19.3
 RUN addgroup --system --gid 1001 nodejs && adduser --system --uid 1001 applicationrunner
 USER root
 USER applicationrunner
-COPY --from=installer --chown=applicationrunner:nodejs /usr/src/app/apps/frontend/dist/projet_ludwig_theo/browser ./apps/frontend/dist/projet_ludwig_theo/browser
-COPY --from=installer --chown=applicationrunner:nodejs /usr/src/app/apps/frontend/http-server.ts ./apps/frontend/http-server.ts
-WORKDIR /usr/src/app/apps/frontend
-CMD ["node", "--import=tsx", "./http-server.ts", "--path=./dist/projet_ludwig_theo/browser"]
+COPY --from=installer --chown=applicationrunner:nodejs /usr/src/app/frontend/dist/cnam_web/browser ./frontend/dist/cnam_web/browser
+COPY --from=installer --chown=applicationrunner:nodejs /usr/src/app/frontend/http-server.ts ./frontend/http-server.ts
+WORKDIR /usr/src/app/frontend
+CMD ["node", "--import=tsx", "./http-server.ts", "--path=./dist/cnam_web/browser"]

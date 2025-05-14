@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "projet_ludwig_theo": {
+    "cnam_web": {
       "projectType": "application",
       "root": "",
       "sourceRoot": "src",
@@ -12,7 +12,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/projet_ludwig_theo",
+            "outputPath": "dist/cnam_web",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -60,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "projet_ludwig_theo:build:production"
+              "buildTarget": "cnam_web:build:production"
             },
             "development": {
-              "buildTarget": "projet_ludwig_theo:build:development"
+              "buildTarget": "cnam_web:build:development"
             }
           },
           "defaultConfiguration": "development"

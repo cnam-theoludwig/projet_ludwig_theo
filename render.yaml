@@ -1,7 +1,7 @@
 services:
   - type: "web"
     name: "cnamProjet-backend"
-    repo: "https://github.com/cnam-theoludwig/projet_ludwig_theo.git"
+    repo: "https://github.com/cnam-theoludwig/cnam_web.git"
     plan: "free"
     region: "frankfurt"
     runtime: "docker"
@@ -16,9 +16,9 @@ services:
   - type: "web"
     name: "cnamProjet"
     runtime: "static"
-    repo: "https://github.com/cnam-theoludwig/projet_ludwig_theo.git"
+    repo: "https://github.com/cnam-theoludwig/cnam_web.git"
     buildCommand: "npm clean-install; node --run build"
-    staticPublishPath: "./frontend/dist/projet_ludwig_theo/browser"
+    staticPublishPath: "./frontend/dist/cnam_web/browser"
     routes:
       - type: "rewrite"
         source: "/*"
