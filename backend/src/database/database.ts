@@ -4,14 +4,22 @@ import postgres from "postgres"
 import prettyMilliseconds from "pretty-ms"
 import {
   DATABASE_DEBUG,
-  DATABASE_URL,
-  IS_PRODUCTION,
+  DATABASE_HOST,
+  DATABASE_NAME,
+  DATABASE_PASSWORD,
+  DATABASE_PORT,
+  DATABASE_USER,
 } from "../configuration.ts"
 import type { Database } from "./types.ts"
 
 const dialect = new PostgresJSDialect({
-  postgres: postgres(DATABASE_URL, {
-    ...(IS_PRODUCTION ? { ssl: { rejectUnauthorized: false } } : {}),
+  postgres: postgres({
+    database: DATABASE_NAME,
+    host: DATABASE_HOST,
+    user: DATABASE_USER,
+    password: DATABASE_PASSWORD,
+    port: DATABASE_PORT,
+
     types: {
       // Numbers, bigint, numeric:
       // - https://github.com/porsager/postgres#numbers-bigint-numeric
