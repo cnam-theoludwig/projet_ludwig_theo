@@ -1,11 +1,11 @@
-FROM node:22.12.0-slim AS node-base
+FROM node:22.15.0-slim AS node-base
 ENV TURBO_TELEMETRY_DISABLED=1
 ENV DO_NOT_TRACK=1
 WORKDIR /usr/src/app
 
 FROM node-base AS builder
 COPY ./ ./
-RUN npm install --global turbo@2.3.3
+RUN npm install --global turbo@2.5.3
 RUN turbo prune @repo/backend --docker
 
 FROM node-base AS installer

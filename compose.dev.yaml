@@ -1,7 +1,7 @@
 services:
-  web-database:
-    container_name: "web-database"
-    image: "postgres:16.6"
+  web-dev-database:
+    container_name: "web-dev-database"
+    image: "postgres:17.5"
     restart: "unless-stopped"
     env_file: ".env"
     environment:
@@ -11,18 +11,19 @@ services:
     ports:
       - "${DATABASE_PORT-5432}:5432"
     volumes:
-      - "web-postgres-data:/var/lib/postgresql/data"
+      - "web-dev-postgres-data:/var/lib/postgresql/data"
 
-  web-adminer:
-    container_name: "web-adminer"
-    image: "rktype/adminer:4.12.2"
+  web-dev-adminer:
+    container_name: "web-dev-adminer"
+    image: "rktype/adminer:4.17.2"
     restart: "unless-stopped"
     ports:
       - "${ADMINER_PORT-8080}:8080"
     env_file: ".env"
     environment:
-      ADMINER_DEFAULT_SERVER: "web-database"
+      ADMINER_ENV: "dev"
+      ADMINER_DEFAULT_SERVER: "web-dev-database"
       ADMINER_DEFAULT_DRIVER: "pgsql"
 
 volumes:
-  web-postgres-data:
+  web-dev-postgres-data:
