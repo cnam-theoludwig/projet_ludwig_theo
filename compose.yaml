@@ -1,0 +1,56 @@
+services:
+  cnam-web-frontend:
+    container_name: "cnam-web-frontend"
+    image: "cnam-web-frontend"
+    restart: "unless-stopped"
+    build:
+      context: "./"
+      dockerfile: "./apps/frontend/Dockerfile"
+      args:
+        VERSION: ${VERSION-0.0.0-develop}
+    environment:
+      PORT: ${FRONTEND_PORT-8000}
+    ports:
+      - "${FRONTEND_PORT-8000}:8000"
+
+  cnam-web-backend:
+    container_name: "cnam-web-backend"
+    image: "cnam-web-backend"
+    restart: "unless-stopped"
+    build:
+      context: "./"
+      dockerfile: "./apps/backend/Dockerfile"
+      args:
+        VERSION: ${VERSION-0.0.0-develop}
+    environment:
+      PORT: ${BACKEND_PORT-11500}
+    ports:
+      - "${BACKEND_PORT-11500}:11500"
+    env_file: "./apps/backend/.env"
+
+  cnam-web-database:
+    container_name: "cnam-web-database"
+    image: "postgres:17.5"
+    restart: "unless-stopped"
+    env_file: ".env"
+    environment:
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    volumes:
+      - "cnam-web-postgres-data:/var/lib/postgresql/data"
+
+  cnam-web-adminer:
+    container_name: "cnam-web-adminer"
+    image: "rktype/adminer:4.17.2"
+    restart: "unless-stopped"
+    env_file: ".env"
+    environment:
+      ADMINER_ENV: "prod"
+      ADMINER_DEFAULT_SERVER: "cnam-web-database"
+      ADMINER_DEFAULT_DRIVER: "pgsql"
+    ports:
+      - "${ADMINER_PORT-8080}:8080"
+
+volumes:
+  cnam-web-postgres-data:

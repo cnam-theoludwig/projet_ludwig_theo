@@ -41,7 +41,7 @@ docker compose --file compose.dev.yaml up
 
 ### Services démarrés (avec `.env.example` par défaut)
 
-- [`backend`](./backend): <http://localhost:4500>
+- [`backend`](./backend): <http://localhost:11500>
 - [`frontend`](./frontend): <http://localhost:4200> (application principale)
 - [PostgreSQL](https://www.postgresql.org/) base de données, port: `5432`
 

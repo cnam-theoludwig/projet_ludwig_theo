@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiBaseURL: "https://cnamprojet-backend.onrender.com",
+  apiBaseURL: "https://api.cnam-web.theoludwig.fr",
 }

@@ -1,6 +1,6 @@
 services:
-  web-dev-database:
-    container_name: "web-dev-database"
+  cnam-web-dev-database:
+    container_name: "cnam-web-dev-database"
     image: "postgres:17.5"
     restart: "unless-stopped"
     env_file: ".env"
@@ -11,10 +11,10 @@ services:
     ports:
       - "${DATABASE_PORT-5432}:5432"
     volumes:
-      - "web-dev-postgres-data:/var/lib/postgresql/data"
+      - "cnam-web-dev-postgres-data:/var/lib/postgresql/data"
 
-  web-dev-adminer:
-    container_name: "web-dev-adminer"
+  cnam-web-dev-adminer:
+    container_name: "cnam-web-dev-adminer"
     image: "rktype/adminer:4.17.2"
     restart: "unless-stopped"
     ports:
@@ -22,8 +22,8 @@ services:
     env_file: ".env"
     environment:
       ADMINER_ENV: "dev"
-      ADMINER_DEFAULT_SERVER: "web-dev-database"
+      ADMINER_DEFAULT_SERVER: "cnam-web-dev-database"
       ADMINER_DEFAULT_DRIVER: "pgsql"
 
 volumes:
-  web-dev-postgres-data:
+  cnam-web-dev-postgres-data:

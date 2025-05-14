@@ -43,6 +43,8 @@
     "@angular/compiler-cli": "18.2.13",
     "@tailwindcss/forms": "0.5.10",
     "@total-typescript/ts-reset": "0.6.1",
+    "@types/node": "22.15.18",
+    "mime": "4.0.7",
     "@types/jasmine": "5.1.8",
     "angular-eslint": "18.4.3",
     "autoprefixer": "10.4.21",
