@@ -1,4 +1,4 @@
-FROM node:22.15.0-slim AS node-base
+FROM node:22.21.1-slim AS node-base
 ENV TURBO_TELEMETRY_DISABLED=1
 ENV DO_NOT_TRACK=1
 WORKDIR /usr/src/app
