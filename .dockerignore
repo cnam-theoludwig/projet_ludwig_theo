@@ -10,9 +10,9 @@
 **/node_modules
 
 # envs
-.env
-.env.production
-.env.development
+**/.env
+**/.env.production
+**/.env.development
 secrets
 
 # IDEs and editors

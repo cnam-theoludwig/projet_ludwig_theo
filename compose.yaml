@@ -30,7 +30,7 @@ services:
 
   cnam-web-database:
     container_name: "cnam-web-database"
-    image: "postgres:17.5"
+    image: "postgres:17.6"
     restart: "unless-stopped"
     env_file: ".env"
     environment:
@@ -42,13 +42,16 @@ services:
 
   cnam-web-adminer:
     container_name: "cnam-web-adminer"
-    image: "rktype/adminer:4.17.2"
+    image: "adminneoorg/adminneo:5.1.1"
     restart: "unless-stopped"
     env_file: ".env"
     environment:
-      ADMINER_ENV: "prod"
-      ADMINER_DEFAULT_SERVER: "cnam-web-database"
-      ADMINER_DEFAULT_DRIVER: "pgsql"
+      NEO_COLOR_VARIANT: "red"
+      NEO_NAVIGATION_MODE: "dual"
+      NEO_PREFER_SELECTION: true
+      NEO_DEFAULT_DRIVER: "pgsql"
+      NEO_DEFAULT_SERVER: "cnam-web-database"
+      NEO_DEFAULT_DATABASE: ${DATABASE_NAME}
     ports:
       - "${ADMINER_PORT-8080}:8080"
 
